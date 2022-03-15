@@ -112,6 +112,7 @@ const queryClient = async ({ addr: addr }: QueryClientOptions = { addr: "http://
 };
 
 export {
+  types,
   txClient,
   queryClient,
 };

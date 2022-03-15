@@ -88,4 +88,4 @@ const txClient = async (wallet, { addr: addr } = { addr: "http://localhost:26657
 const queryClient = async ({ addr: addr } = { addr: "http://localhost:1317" }) => {
     return new Api({ baseUrl: addr });
 };
-export { txClient, queryClient, };
+export { types, txClient, queryClient, };
