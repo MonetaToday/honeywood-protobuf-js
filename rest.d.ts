@@ -7,7 +7,24 @@ export interface QueryShowApiariesInfoByBearIdResponseApiaryInfo {
     /** @format uint64 */
     id?: string;
     countHoney?: string;
+    bees?: string[];
     params?: BearsApiaryParams;
+}
+export interface QueryShowBeesInfoByBearIdResponseBeeInfo {
+    /** @format uint64 */
+    id?: string;
+    apiaryHouse?: BearsApiaryHouse;
+    params?: BearsBeeParams;
+}
+export interface QueryShowDecorationsInfoByBearIdResponseDecorationInfo {
+    /** @format uint64 */
+    id?: string;
+    params?: BearsDecorationParams;
+}
+export interface QueryShowTreesInfoByBearIdResponseTreeInfo {
+    /** @format uint64 */
+    id?: string;
+    params?: BearsTreeParams;
 }
 export interface TilesItems {
     /** @format uint64 */
@@ -333,6 +350,12 @@ export interface BearsQueryParamsResponse {
 export interface BearsQueryShowApiariesInfoByBearIdResponse {
     apiariesInfo?: QueryShowApiariesInfoByBearIdResponseApiaryInfo[];
 }
+export interface BearsQueryShowBeesInfoByBearIdResponse {
+    beesInfo?: QueryShowBeesInfoByBearIdResponseBeeInfo[];
+}
+export interface BearsQueryShowDecorationsInfoByBearIdResponse {
+    decorationsInfo?: QueryShowDecorationsInfoByBearIdResponseDecorationInfo[];
+}
 export interface BearsQueryShowHoneyPowerByApiaryIdResponse {
     honeyPower?: string;
 }
@@ -349,6 +372,9 @@ export interface BearsQueryShowLastAirInfoResponse {
     purity?: string;
     supply?: string;
     consume?: string;
+}
+export interface BearsQueryShowTreesInfoByBearIdResponse {
+    treesInfo?: QueryShowTreesInfoByBearIdResponseTreeInfo[];
 }
 export interface BearsTiles {
     item?: TilesItems;
@@ -698,6 +724,24 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags Query
+     * @name QueryShowBeesInfoByBearId
+     * @summary Queries a list of ShowBeesInfoByBearId items.
+     * @request GET:/MonetaToday/honeywood/bears/show_bees_info_by_bear_id/{bearId}
+     */
+    queryShowBeesInfoByBearId: (bearId: string, params?: RequestParams) => Promise<HttpResponse<BearsQueryShowBeesInfoByBearIdResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryShowDecorationsInfoByBearId
+     * @summary Queries a list of ShowDecorationsInfoByBearId items.
+     * @request GET:/MonetaToday/honeywood/bears/show_decorations_info_by_bear_id/{bearId}
+     */
+    queryShowDecorationsInfoByBearId: (bearId: string, params?: RequestParams) => Promise<HttpResponse<BearsQueryShowDecorationsInfoByBearIdResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
      * @name QueryShowApiariesInfoByBearId
      * @summary Queries a list of ShowApiariesInfoByBearId items.
      * @request GET:/MonetaToday/honeywood/bears/show_honey_from_all_bear_apiaries/{bearId}
@@ -739,6 +783,15 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @request GET:/MonetaToday/honeywood/bears/show_last_air_info
      */
     queryShowLastAirInfo: (params?: RequestParams) => Promise<HttpResponse<BearsQueryShowLastAirInfoResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryShowTreesInfoByBearId
+     * @summary Queries a list of ShowTreesInfoByBearId items.
+     * @request GET:/MonetaToday/honeywood/bears/show_trees_info_by_bear_id/{bearId}
+     */
+    queryShowTreesInfoByBearId: (bearId: string, params?: RequestParams) => Promise<HttpResponse<BearsQueryShowTreesInfoByBearIdResponse, RpcStatus>>;
     /**
      * No description
      *
