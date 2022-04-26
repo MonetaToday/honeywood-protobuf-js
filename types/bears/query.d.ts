@@ -3,7 +3,6 @@ import { Params } from "../bears/params";
 import { BearNames } from "../bears/bear_names";
 import { PageRequest, PageResponse } from "../cosmos/base/query/v1beta1/pagination";
 import { Bears } from "../bears/bears";
-import { AddressBears } from "../bears/address_bears";
 import { Fields } from "../bears/fields";
 import { Trees, TreeParams } from "../bears/trees";
 import { Decorations, DecorationParams } from "../bears/decorations";
@@ -43,19 +42,6 @@ export interface QueryAllBearsRequest {
 }
 export interface QueryAllBearsResponse {
     Bears: Bears[];
-    pagination: PageResponse | undefined;
-}
-export interface QueryGetAddressBearsRequest {
-    address: string;
-}
-export interface QueryGetAddressBearsResponse {
-    addressBears: AddressBears | undefined;
-}
-export interface QueryAllAddressBearsRequest {
-    pagination: PageRequest | undefined;
-}
-export interface QueryAllAddressBearsResponse {
-    addressBears: AddressBears[];
     pagination: PageResponse | undefined;
 }
 export interface QueryGetFieldsRequest {
@@ -273,34 +259,6 @@ export declare const QueryAllBearsResponse: {
     fromJSON(object: any): QueryAllBearsResponse;
     toJSON(message: QueryAllBearsResponse): unknown;
     fromPartial(object: DeepPartial<QueryAllBearsResponse>): QueryAllBearsResponse;
-};
-export declare const QueryGetAddressBearsRequest: {
-    encode(message: QueryGetAddressBearsRequest, writer?: Writer): Writer;
-    decode(input: Reader | Uint8Array, length?: number): QueryGetAddressBearsRequest;
-    fromJSON(object: any): QueryGetAddressBearsRequest;
-    toJSON(message: QueryGetAddressBearsRequest): unknown;
-    fromPartial(object: DeepPartial<QueryGetAddressBearsRequest>): QueryGetAddressBearsRequest;
-};
-export declare const QueryGetAddressBearsResponse: {
-    encode(message: QueryGetAddressBearsResponse, writer?: Writer): Writer;
-    decode(input: Reader | Uint8Array, length?: number): QueryGetAddressBearsResponse;
-    fromJSON(object: any): QueryGetAddressBearsResponse;
-    toJSON(message: QueryGetAddressBearsResponse): unknown;
-    fromPartial(object: DeepPartial<QueryGetAddressBearsResponse>): QueryGetAddressBearsResponse;
-};
-export declare const QueryAllAddressBearsRequest: {
-    encode(message: QueryAllAddressBearsRequest, writer?: Writer): Writer;
-    decode(input: Reader | Uint8Array, length?: number): QueryAllAddressBearsRequest;
-    fromJSON(object: any): QueryAllAddressBearsRequest;
-    toJSON(message: QueryAllAddressBearsRequest): unknown;
-    fromPartial(object: DeepPartial<QueryAllAddressBearsRequest>): QueryAllAddressBearsRequest;
-};
-export declare const QueryAllAddressBearsResponse: {
-    encode(message: QueryAllAddressBearsResponse, writer?: Writer): Writer;
-    decode(input: Reader | Uint8Array, length?: number): QueryAllAddressBearsResponse;
-    fromJSON(object: any): QueryAllAddressBearsResponse;
-    toJSON(message: QueryAllAddressBearsResponse): unknown;
-    fromPartial(object: DeepPartial<QueryAllAddressBearsResponse>): QueryAllAddressBearsResponse;
 };
 export declare const QueryGetFieldsRequest: {
     encode(message: QueryGetFieldsRequest, writer?: Writer): Writer;
@@ -622,10 +580,6 @@ export interface Query {
     Bears(request: QueryGetBearsRequest): Promise<QueryGetBearsResponse>;
     /** Queries a list of Bears items. */
     BearsAll(request: QueryAllBearsRequest): Promise<QueryAllBearsResponse>;
-    /** Queries a AddressBears by index. */
-    AddressBears(request: QueryGetAddressBearsRequest): Promise<QueryGetAddressBearsResponse>;
-    /** Queries a list of AddressBears items. */
-    AddressBearsAll(request: QueryAllAddressBearsRequest): Promise<QueryAllAddressBearsResponse>;
     /** Queries a Fields by id. */
     Fields(request: QueryGetFieldsRequest): Promise<QueryGetFieldsResponse>;
     /** Queries a list of Fields items. */
@@ -675,8 +629,6 @@ export declare class QueryClientImpl implements Query {
     BearNamesAll(request: QueryAllBearNamesRequest): Promise<QueryAllBearNamesResponse>;
     Bears(request: QueryGetBearsRequest): Promise<QueryGetBearsResponse>;
     BearsAll(request: QueryAllBearsRequest): Promise<QueryAllBearsResponse>;
-    AddressBears(request: QueryGetAddressBearsRequest): Promise<QueryGetAddressBearsResponse>;
-    AddressBearsAll(request: QueryAllAddressBearsRequest): Promise<QueryAllAddressBearsResponse>;
     Fields(request: QueryGetFieldsRequest): Promise<QueryGetFieldsResponse>;
     FieldsAll(request: QueryAllFieldsRequest): Promise<QueryAllFieldsResponse>;
     Trees(request: QueryGetTreesRequest): Promise<QueryGetTreesResponse>;

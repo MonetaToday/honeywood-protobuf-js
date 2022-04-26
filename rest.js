@@ -146,35 +146,6 @@ export class Api extends HttpClient {
          * No description
          *
          * @tags Query
-         * @name QueryAddressBearsAll
-         * @summary Queries a list of AddressBears items.
-         * @request GET:/MonetaToday/honeywood/bears/address_bears
-         */
-        this.queryAddressBearsAll = (query, params = {}) => this.request({
-            path: `/MonetaToday/honeywood/bears/address_bears`,
-            method: "GET",
-            query: query,
-            format: "json",
-            ...params,
-        });
-        /**
-         * No description
-         *
-         * @tags Query
-         * @name QueryAddressBears
-         * @summary Queries a AddressBears by index.
-         * @request GET:/MonetaToday/honeywood/bears/address_bears/{address}
-         */
-        this.queryAddressBears = (address, params = {}) => this.request({
-            path: `/MonetaToday/honeywood/bears/address_bears/${address}`,
-            method: "GET",
-            format: "json",
-            ...params,
-        });
-        /**
-         * No description
-         *
-         * @tags Query
          * @name QueryAirInfo
          * @summary Queries a AirInfo by index.
          * @request GET:/MonetaToday/honeywood/bears/air_info

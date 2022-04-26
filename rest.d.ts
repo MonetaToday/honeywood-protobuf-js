@@ -31,10 +31,6 @@ export interface TilesItems {
     itemId?: string;
     itemType?: ItemsItemTypes;
 }
-export interface BearsAddressBears {
-    address?: string;
-    bears?: string[];
-}
 export interface BearsAirInfo {
     supply?: string;
     consume?: string;
@@ -206,19 +202,6 @@ export interface BearsParams {
     beeTypes?: BearsBeeParams[];
     honeyDenom?: string;
 }
-export interface BearsQueryAllAddressBearsResponse {
-    addressBears?: BearsAddressBears[];
-    /**
-     * PageResponse is to be embedded in gRPC response messages where the
-     * corresponding request message has used PageRequest.
-     *
-     *  message SomeResponse {
-     *          repeated Bar results = 1;
-     *          PageResponse page = 2;
-     *  }
-     */
-    pagination?: V1Beta1PageResponse;
-}
 export interface BearsQueryAllApiariesResponse {
     Apiaries?: BearsApiaries[];
     /**
@@ -312,9 +295,6 @@ export interface BearsQueryAllTreesResponse {
 }
 export interface BearsQueryCalculateHoneyInApiaryResponse {
     countHoney?: string;
-}
-export interface BearsQueryGetAddressBearsResponse {
-    addressBears?: BearsAddressBears;
 }
 export interface BearsQueryGetAirInfoResponse {
     AirInfo?: BearsAirInfo;
@@ -525,38 +505,6 @@ export declare class HttpClient<SecurityDataType = unknown> {
  * @version version not set
  */
 export declare class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
-    /**
-     * No description
-     *
-     * @tags Query
-     * @name QueryAddressBearsAll
-     * @summary Queries a list of AddressBears items.
-     * @request GET:/MonetaToday/honeywood/bears/address_bears
-     */
-    queryAddressBearsAll: (query?: {
-        "pagination.key"?: string;
-        "pagination.offset"?: string;
-        "pagination.limit"?: string;
-        "pagination.countTotal"?: boolean;
-        "pagination.reverse"?: boolean;
-    }, params?: RequestParams) => Promise<HttpResponse<BearsQueryAllAddressBearsResponse, RpcStatus>>;
-    /**
-     * No description
-     *
-     * @tags Query
-     * @name QueryAddressBears
-     * @summary Queries a AddressBears by index.
-     * @request GET:/MonetaToday/honeywood/bears/address_bears/{address}
-     */
-    queryAddressBears: (address: string, params?: RequestParams) => Promise<HttpResponse<BearsQueryGetAddressBearsResponse, RpcStatus>>;
-    /**
-     * No description
-     *
-     * @tags Query
-     * @name QueryAirInfo
-     * @summary Queries a AirInfo by index.
-     * @request GET:/MonetaToday/honeywood/bears/air_info
-     */
     queryAirInfo: (params?: RequestParams) => Promise<HttpResponse<BearsQueryGetAirInfoResponse, RpcStatus>>;
     /**
      * No description

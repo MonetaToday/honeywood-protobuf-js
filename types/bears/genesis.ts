@@ -4,7 +4,6 @@ import { util, configure, Writer, Reader } from "protobufjs/minimal";
 import { Params } from "../bears/params";
 import { BearNames } from "../bears/bear_names";
 import { Bears } from "../bears/bears";
-import { AddressBears } from "../bears/address_bears";
 import { Fields } from "../bears/fields";
 import { Trees } from "../bears/trees";
 import { Decorations } from "../bears/decorations";
@@ -20,7 +19,6 @@ export interface GenesisState {
   bearNamesList: BearNames[];
   bearsList: Bears[];
   bearsCount: number;
-  addressBearsList: AddressBears[];
   fieldsList: Fields[];
   fieldsCount: number;
   treesList: Trees[];
@@ -58,41 +56,38 @@ export const GenesisState = {
     if (message.bearsCount !== 0) {
       writer.uint32(32).uint64(message.bearsCount);
     }
-    for (const v of message.addressBearsList) {
-      AddressBears.encode(v!, writer.uint32(42).fork()).ldelim();
-    }
     for (const v of message.fieldsList) {
-      Fields.encode(v!, writer.uint32(50).fork()).ldelim();
+      Fields.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     if (message.fieldsCount !== 0) {
-      writer.uint32(56).uint64(message.fieldsCount);
+      writer.uint32(48).uint64(message.fieldsCount);
     }
     for (const v of message.treesList) {
-      Trees.encode(v!, writer.uint32(66).fork()).ldelim();
+      Trees.encode(v!, writer.uint32(58).fork()).ldelim();
     }
     if (message.treesCount !== 0) {
-      writer.uint32(72).uint64(message.treesCount);
+      writer.uint32(64).uint64(message.treesCount);
     }
     for (const v of message.decorationsList) {
-      Decorations.encode(v!, writer.uint32(82).fork()).ldelim();
+      Decorations.encode(v!, writer.uint32(74).fork()).ldelim();
     }
     if (message.decorationsCount !== 0) {
-      writer.uint32(88).uint64(message.decorationsCount);
+      writer.uint32(80).uint64(message.decorationsCount);
     }
     for (const v of message.apiariesList) {
-      Apiaries.encode(v!, writer.uint32(98).fork()).ldelim();
+      Apiaries.encode(v!, writer.uint32(90).fork()).ldelim();
     }
     if (message.apiariesCount !== 0) {
-      writer.uint32(104).uint64(message.apiariesCount);
+      writer.uint32(96).uint64(message.apiariesCount);
     }
     for (const v of message.beesList) {
-      Bees.encode(v!, writer.uint32(114).fork()).ldelim();
+      Bees.encode(v!, writer.uint32(106).fork()).ldelim();
     }
     if (message.beesCount !== 0) {
-      writer.uint32(120).uint64(message.beesCount);
+      writer.uint32(112).uint64(message.beesCount);
     }
     if (message.airInfo !== undefined) {
-      AirInfo.encode(message.airInfo, writer.uint32(130).fork()).ldelim();
+      AirInfo.encode(message.airInfo, writer.uint32(122).fork()).ldelim();
     }
     return writer;
   },
@@ -103,7 +98,6 @@ export const GenesisState = {
     const message = { ...baseGenesisState } as GenesisState;
     message.bearNamesList = [];
     message.bearsList = [];
-    message.addressBearsList = [];
     message.fieldsList = [];
     message.treesList = [];
     message.decorationsList = [];
@@ -125,43 +119,38 @@ export const GenesisState = {
           message.bearsCount = longToNumber(reader.uint64() as Long);
           break;
         case 5:
-          message.addressBearsList.push(
-            AddressBears.decode(reader, reader.uint32())
-          );
-          break;
-        case 6:
           message.fieldsList.push(Fields.decode(reader, reader.uint32()));
           break;
-        case 7:
+        case 6:
           message.fieldsCount = longToNumber(reader.uint64() as Long);
           break;
-        case 8:
+        case 7:
           message.treesList.push(Trees.decode(reader, reader.uint32()));
           break;
-        case 9:
+        case 8:
           message.treesCount = longToNumber(reader.uint64() as Long);
           break;
-        case 10:
+        case 9:
           message.decorationsList.push(
             Decorations.decode(reader, reader.uint32())
           );
           break;
-        case 11:
+        case 10:
           message.decorationsCount = longToNumber(reader.uint64() as Long);
           break;
-        case 12:
+        case 11:
           message.apiariesList.push(Apiaries.decode(reader, reader.uint32()));
           break;
-        case 13:
+        case 12:
           message.apiariesCount = longToNumber(reader.uint64() as Long);
           break;
-        case 14:
+        case 13:
           message.beesList.push(Bees.decode(reader, reader.uint32()));
           break;
-        case 15:
+        case 14:
           message.beesCount = longToNumber(reader.uint64() as Long);
           break;
-        case 16:
+        case 15:
           message.airInfo = AirInfo.decode(reader, reader.uint32());
           break;
         default:
@@ -176,7 +165,6 @@ export const GenesisState = {
     const message = { ...baseGenesisState } as GenesisState;
     message.bearNamesList = [];
     message.bearsList = [];
-    message.addressBearsList = [];
     message.fieldsList = [];
     message.treesList = [];
     message.decorationsList = [];
@@ -201,14 +189,6 @@ export const GenesisState = {
       message.bearsCount = Number(object.bearsCount);
     } else {
       message.bearsCount = 0;
-    }
-    if (
-      object.addressBearsList !== undefined &&
-      object.addressBearsList !== null
-    ) {
-      for (const e of object.addressBearsList) {
-        message.addressBearsList.push(AddressBears.fromJSON(e));
-      }
     }
     if (object.fieldsList !== undefined && object.fieldsList !== null) {
       for (const e of object.fieldsList) {
@@ -293,13 +273,6 @@ export const GenesisState = {
       obj.bearsList = [];
     }
     message.bearsCount !== undefined && (obj.bearsCount = message.bearsCount);
-    if (message.addressBearsList) {
-      obj.addressBearsList = message.addressBearsList.map((e) =>
-        e ? AddressBears.toJSON(e) : undefined
-      );
-    } else {
-      obj.addressBearsList = [];
-    }
     if (message.fieldsList) {
       obj.fieldsList = message.fieldsList.map((e) =>
         e ? Fields.toJSON(e) : undefined
@@ -354,7 +327,6 @@ export const GenesisState = {
     const message = { ...baseGenesisState } as GenesisState;
     message.bearNamesList = [];
     message.bearsList = [];
-    message.addressBearsList = [];
     message.fieldsList = [];
     message.treesList = [];
     message.decorationsList = [];
@@ -379,14 +351,6 @@ export const GenesisState = {
       message.bearsCount = object.bearsCount;
     } else {
       message.bearsCount = 0;
-    }
-    if (
-      object.addressBearsList !== undefined &&
-      object.addressBearsList !== null
-    ) {
-      for (const e of object.addressBearsList) {
-        message.addressBearsList.push(AddressBears.fromPartial(e));
-      }
     }
     if (object.fieldsList !== undefined && object.fieldsList !== null) {
       for (const e of object.fieldsList) {
