@@ -34,37 +34,37 @@ export const GenesisState = {
             writer.uint32(32).uint64(message.bearsCount);
         }
         for (const v of message.fieldsList) {
-            Fields.encode(v, writer.uint32(50).fork()).ldelim();
+            Fields.encode(v, writer.uint32(42).fork()).ldelim();
         }
         if (message.fieldsCount !== 0) {
-            writer.uint32(56).uint64(message.fieldsCount);
+            writer.uint32(48).uint64(message.fieldsCount);
         }
         for (const v of message.treesList) {
-            Trees.encode(v, writer.uint32(66).fork()).ldelim();
+            Trees.encode(v, writer.uint32(58).fork()).ldelim();
         }
         if (message.treesCount !== 0) {
-            writer.uint32(72).uint64(message.treesCount);
+            writer.uint32(64).uint64(message.treesCount);
         }
         for (const v of message.decorationsList) {
-            Decorations.encode(v, writer.uint32(82).fork()).ldelim();
+            Decorations.encode(v, writer.uint32(74).fork()).ldelim();
         }
         if (message.decorationsCount !== 0) {
-            writer.uint32(88).uint64(message.decorationsCount);
+            writer.uint32(80).uint64(message.decorationsCount);
         }
         for (const v of message.apiariesList) {
-            Apiaries.encode(v, writer.uint32(98).fork()).ldelim();
+            Apiaries.encode(v, writer.uint32(90).fork()).ldelim();
         }
         if (message.apiariesCount !== 0) {
-            writer.uint32(104).uint64(message.apiariesCount);
+            writer.uint32(96).uint64(message.apiariesCount);
         }
         for (const v of message.beesList) {
-            Bees.encode(v, writer.uint32(114).fork()).ldelim();
+            Bees.encode(v, writer.uint32(106).fork()).ldelim();
         }
         if (message.beesCount !== 0) {
-            writer.uint32(120).uint64(message.beesCount);
+            writer.uint32(112).uint64(message.beesCount);
         }
         if (message.airInfo !== undefined) {
-            AirInfo.encode(message.airInfo, writer.uint32(130).fork()).ldelim();
+            AirInfo.encode(message.airInfo, writer.uint32(122).fork()).ldelim();
         }
         return writer;
     },

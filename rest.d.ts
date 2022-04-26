@@ -3,6 +3,17 @@ export declare enum ItemsItemTypes {
     TREE = "TREE",
     DECORATION = "DECORATION"
 }
+export interface QueryListAddressesStatisticResponseAddressesStatistic {
+    address?: string;
+    balances?: V1Beta1Coin[];
+}
+export interface QueryListBearsStatisticResponseBearsStatistic {
+    /** @format uint64 */
+    id?: string;
+    owner?: string;
+    name?: string;
+    honeyPower?: string;
+}
 export interface QueryShowApiariesInfoByBearIdResponseApiaryInfo {
     /** @format uint64 */
     id?: string;
@@ -31,6 +42,14 @@ export interface TilesItems {
     itemId?: string;
     itemType?: ItemsItemTypes;
 }
+export interface BearsAirHistory {
+    /** @format uint64 */
+    id?: string;
+    /** @format uint64 */
+    height?: string;
+    count?: string;
+    purity?: string;
+}
 export interface BearsAirInfo {
     supply?: string;
     consume?: string;
@@ -45,6 +64,7 @@ export interface BearsApiaries {
     /** @format uint64 */
     spaceOccupied?: string;
     honeyFromPast?: string;
+    fieldFertility?: string;
 }
 export interface BearsApiaryHouse {
     /** @format uint64 */
@@ -57,6 +77,7 @@ export interface BearsApiaryParams {
     spaceAvailable?: string;
     maxHoney?: string;
     deleteReward?: V1Beta1Coin[];
+    fertility?: string;
 }
 export interface BearsBearNames {
     name?: string;
@@ -94,6 +115,8 @@ export interface BearsBees {
     bearOwner?: BearsBearOwner;
     apiaryHouse?: BearsApiaryHouse;
     params?: BearsBeeParams;
+    fieldFertility?: string;
+    apiaryFertility?: string;
 }
 export interface BearsCycleHistory {
     /** @format uint64 */
@@ -113,6 +136,7 @@ export interface BearsDecorations {
 }
 export interface BearsFieldParams {
     fieldType?: string;
+    fertility?: string;
     priceTile?: V1Beta1Coin[];
 }
 export interface BearsFieldRows {
@@ -185,22 +209,18 @@ export declare type BearsMsgSetDecorationPositionResponse = object;
 export declare type BearsMsgSetNameResponse = object;
 export declare type BearsMsgUnsetApiaryHouseForBeeResponse = object;
 export declare type BearsMsgUnsetDecorationPositionResponse = object;
-/**
- * Params defines the parameters for the module.
- */
-export interface BearsParams {
-    /** @format uint64 */
-    blocksPerHour?: string;
-    /** @format uint64 */
-    airHistoryLength?: string;
-    burnRate?: string;
-    priceSetName?: V1Beta1Coin[];
-    fieldTypes?: BearsFieldParams[];
-    treeTypes?: BearsTreeParams[];
-    decorationTypes?: BearsDecorationParams[];
-    apiaryTypes?: BearsApiaryParams[];
-    beeTypes?: BearsBeeParams[];
-    honeyDenom?: string;
+export interface BearsQueryAllAirHistoryResponse {
+    airHistory?: BearsAirHistory[];
+    /**
+     * PageResponse is to be embedded in gRPC response messages where the
+     * corresponding request message has used PageRequest.
+     *
+     *  message SomeResponse {
+     *          repeated Bar results = 1;
+     *          PageResponse page = 2;
+     *  }
+     */
+    pagination?: V1Beta1PageResponse;
 }
 export interface BearsQueryAllApiariesResponse {
     Apiaries?: BearsApiaries[];
@@ -320,12 +340,38 @@ export interface BearsQueryGetFieldsResponse {
 export interface BearsQueryGetTreesResponse {
     Trees?: BearsTrees;
 }
+export interface BearsQueryListAddressesStatisticResponse {
+    Addresses?: QueryListAddressesStatisticResponseAddressesStatistic[];
+    /**
+     * PageResponse is to be embedded in gRPC response messages where the
+     * corresponding request message has used PageRequest.
+     *
+     *  message SomeResponse {
+     *          repeated Bar results = 1;
+     *          PageResponse page = 2;
+     *  }
+     */
+    pagination?: V1Beta1PageResponse;
+}
+export interface BearsQueryListBearsStatisticResponse {
+    Bears?: QueryListBearsStatisticResponseBearsStatistic[];
+    /**
+     * PageResponse is to be embedded in gRPC response messages where the
+     * corresponding request message has used PageRequest.
+     *
+     *  message SomeResponse {
+     *          repeated Bar results = 1;
+     *          PageResponse page = 2;
+     *  }
+     */
+    pagination?: V1Beta1PageResponse;
+}
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
 export interface BearsQueryParamsResponse {
     /** params holds all the parameters of this module. */
-    params?: BearsParams;
+    params?: HoneywoodbearsParams;
 }
 export interface BearsQueryShowApiariesInfoByBearIdResponse {
     apiariesInfo?: QueryShowApiariesInfoByBearIdResponseApiaryInfo[];
@@ -372,7 +418,137 @@ export interface BearsTrees {
     bearOwner?: BearsBearOwner;
     position?: BearsItemPosition;
 }
+/**
+ * Params defines the parameters for the module.
+ */
+export interface HoneywoodbearsParams {
+    /** @format uint64 */
+    blocksPerHour?: string;
+    /** @format uint64 */
+    airHistoryLength?: string;
+    burnRate?: string;
+    priceSetName?: V1Beta1Coin[];
+    fieldTypes?: BearsFieldParams[];
+    treeTypes?: BearsTreeParams[];
+    decorationTypes?: BearsDecorationParams[];
+    apiaryTypes?: BearsApiaryParams[];
+    beeTypes?: BearsBeeParams[];
+    honeyDenom?: string;
+}
+/**
+* `Any` contains an arbitrary serialized protocol buffer message along with a
+URL that describes the type of the serialized message.
+
+Protobuf library provides support to pack/unpack Any values in the form
+of utility functions or additional generated methods of the Any type.
+
+Example 1: Pack and unpack a message in C++.
+
+    Foo foo = ...;
+    Any any;
+    any.PackFrom(foo);
+    ...
+    if (any.UnpackTo(&foo)) {
+      ...
+    }
+
+Example 2: Pack and unpack a message in Java.
+
+    Foo foo = ...;
+    Any any = Any.pack(foo);
+    ...
+    if (any.is(Foo.class)) {
+      foo = any.unpack(Foo.class);
+    }
+
+ Example 3: Pack and unpack a message in Python.
+
+    foo = Foo(...)
+    any = Any()
+    any.Pack(foo)
+    ...
+    if any.Is(Foo.DESCRIPTOR):
+      any.Unpack(foo)
+      ...
+
+ Example 4: Pack and unpack a message in Go
+
+     foo := &pb.Foo{...}
+     any, err := anypb.New(foo)
+     if err != nil {
+       ...
+     }
+     ...
+     foo := &pb.Foo{}
+     if err := any.UnmarshalTo(foo); err != nil {
+       ...
+     }
+
+The pack methods provided by protobuf library will by default use
+'type.googleapis.com/full.type.name' as the type URL and the unpack
+methods only use the fully qualified type name after the last '/'
+in the type URL, for example "foo.bar.com/x/y.z" will yield type
+name "y.z".
+
+
+JSON
+====
+The JSON representation of an `Any` value uses the regular
+representation of the deserialized, embedded message, with an
+additional field `@type` which contains the type URL. Example:
+
+    package google.profile;
+    message Person {
+      string first_name = 1;
+      string last_name = 2;
+    }
+
+    {
+      "@type": "type.googleapis.com/google.profile.Person",
+      "firstName": <string>,
+      "lastName": <string>
+    }
+
+If the embedded message type is well-known and has a custom JSON
+representation, that representation will be embedded adding a field
+`value` which holds the custom JSON in addition to the `@type`
+field. Example (for message [google.protobuf.Duration][]):
+
+    {
+      "@type": "type.googleapis.com/google.protobuf.Duration",
+      "value": "1.212s"
+    }
+*/
 export interface ProtobufAny {
+    /**
+     * A URL/resource name that uniquely identifies the type of the serialized
+     * protocol buffer message. This string must contain at least
+     * one "/" character. The last segment of the URL's path must represent
+     * the fully qualified name of the type (as in
+     * `path/google.protobuf.Duration`). The name should be in a canonical form
+     * (e.g., leading "." is not accepted).
+     *
+     * In practice, teams usually precompile into the binary all types that they
+     * expect it to use in the context of Any. However, for URLs which use the
+     * scheme `http`, `https`, or no scheme, one can optionally set up a type
+     * server that maps type URLs to message definitions as follows:
+     *
+     * * If no scheme is provided, `https` is assumed.
+     * * An HTTP GET on the URL must yield a [google.protobuf.Type][]
+     *   value in binary format, or produce an error.
+     * * Applications are allowed to cache lookup results based on the
+     *   URL, or have them precompiled into a binary to avoid any
+     *   lookup. Therefore, binary compatibility needs to be preserved
+     *   on changes to types. (Use versioned type names to manage
+     *   breaking changes.)
+     *
+     * Note: this functionality is not currently available in the official
+     * protobuf release, and it is not used for type URLs beginning with
+     * type.googleapis.com.
+     *
+     * Schemes other than `http`, `https` (or the empty scheme) might be
+     * used with implementation specific semantics.
+     */
     "@type"?: string;
 }
 export interface RpcStatus {
@@ -501,10 +677,33 @@ export declare class HttpClient<SecurityDataType = unknown> {
     request: <T = any, E = any>({ body, secure, path, type, query, format, baseUrl, cancelToken, ...params }: FullRequestParams) => Promise<HttpResponse<T, E>>;
 }
 /**
- * @title bears/address_bears.proto
+ * @title bears/air_info.proto
  * @version version not set
  */
 export declare class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryAirHistoryAll
+     * @summary Queries a list of AirHistory items.
+     * @request GET:/MonetaToday/honeywood/bears/air_history
+     */
+    queryAirHistoryAll: (query?: {
+        "pagination.key"?: string;
+        "pagination.offset"?: string;
+        "pagination.limit"?: string;
+        "pagination.countTotal"?: boolean;
+        "pagination.reverse"?: boolean;
+    }, params?: RequestParams) => Promise<HttpResponse<BearsQueryAllAirHistoryResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryAirInfo
+     * @summary Queries a AirInfo by index.
+     * @request GET:/MonetaToday/honeywood/bears/air_info
+     */
     queryAirInfo: (params?: RequestParams) => Promise<HttpResponse<BearsQueryGetAirInfoResponse, RpcStatus>>;
     /**
      * No description
@@ -659,6 +858,36 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @request GET:/MonetaToday/honeywood/bears/fields/{id}
      */
     queryFields: (id: string, params?: RequestParams) => Promise<HttpResponse<BearsQueryGetFieldsResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryListAddressesStatistic
+     * @summary Queries a list of ListAddressesStatistic items.
+     * @request GET:/MonetaToday/honeywood/bears/list_addresses_statistic
+     */
+    queryListAddressesStatistic: (query?: {
+        "pagination.key"?: string;
+        "pagination.offset"?: string;
+        "pagination.limit"?: string;
+        "pagination.countTotal"?: boolean;
+        "pagination.reverse"?: boolean;
+    }, params?: RequestParams) => Promise<HttpResponse<BearsQueryListAddressesStatisticResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryListBearsStatistic
+     * @summary Queries a list of ListBearsStatistic items.
+     * @request GET:/MonetaToday/honeywood/bears/list_bears_statistic
+     */
+    queryListBearsStatistic: (query?: {
+        "pagination.key"?: string;
+        "pagination.offset"?: string;
+        "pagination.limit"?: string;
+        "pagination.countTotal"?: boolean;
+        "pagination.reverse"?: boolean;
+    }, params?: RequestParams) => Promise<HttpResponse<BearsQueryListBearsStatisticResponse, RpcStatus>>;
     /**
      * No description
      *

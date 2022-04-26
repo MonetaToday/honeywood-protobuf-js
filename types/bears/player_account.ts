@@ -7,24 +7,24 @@ export const protobufPackage = "MonetaToday.honeywood.bears";
 
 export interface VestingParams {
   id: string;
-  honey_start_from_listing_in_month: number;
-  honey_end_from_listing_in_month: number;
-  cone_start_from_listing_in_month: number;
-  cone_end_from_listing_in_month: number;
+  honeyStartFromListingInMonth: number;
+  honeyEndFromListingInMonth: number;
+  coneStartFromListingInMonth: number;
+  coneEndFromListingInMonth: number;
 }
 
 export interface PlayerAccount {
-  base_vesting_account: BaseVestingAccount | undefined;
+  baseVestingAccount: BaseVestingAccount | undefined;
   bears: number[];
-  vesting_type: string;
+  vestingType: string;
 }
 
 const baseVestingParams: object = {
   id: "",
-  honey_start_from_listing_in_month: 0,
-  honey_end_from_listing_in_month: 0,
-  cone_start_from_listing_in_month: 0,
-  cone_end_from_listing_in_month: 0,
+  honeyStartFromListingInMonth: 0,
+  honeyEndFromListingInMonth: 0,
+  coneStartFromListingInMonth: 0,
+  coneEndFromListingInMonth: 0,
 };
 
 export const VestingParams = {
@@ -32,17 +32,17 @@ export const VestingParams = {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
-    if (message.honey_start_from_listing_in_month !== 0) {
-      writer.uint32(16).uint64(message.honey_start_from_listing_in_month);
+    if (message.honeyStartFromListingInMonth !== 0) {
+      writer.uint32(16).uint64(message.honeyStartFromListingInMonth);
     }
-    if (message.honey_end_from_listing_in_month !== 0) {
-      writer.uint32(24).uint64(message.honey_end_from_listing_in_month);
+    if (message.honeyEndFromListingInMonth !== 0) {
+      writer.uint32(24).uint64(message.honeyEndFromListingInMonth);
     }
-    if (message.cone_start_from_listing_in_month !== 0) {
-      writer.uint32(32).uint64(message.cone_start_from_listing_in_month);
+    if (message.coneStartFromListingInMonth !== 0) {
+      writer.uint32(32).uint64(message.coneStartFromListingInMonth);
     }
-    if (message.cone_end_from_listing_in_month !== 0) {
-      writer.uint32(40).uint64(message.cone_end_from_listing_in_month);
+    if (message.coneEndFromListingInMonth !== 0) {
+      writer.uint32(40).uint64(message.coneEndFromListingInMonth);
     }
     return writer;
   },
@@ -58,22 +58,22 @@ export const VestingParams = {
           message.id = reader.string();
           break;
         case 2:
-          message.honey_start_from_listing_in_month = longToNumber(
+          message.honeyStartFromListingInMonth = longToNumber(
             reader.uint64() as Long
           );
           break;
         case 3:
-          message.honey_end_from_listing_in_month = longToNumber(
+          message.honeyEndFromListingInMonth = longToNumber(
             reader.uint64() as Long
           );
           break;
         case 4:
-          message.cone_start_from_listing_in_month = longToNumber(
+          message.coneStartFromListingInMonth = longToNumber(
             reader.uint64() as Long
           );
           break;
         case 5:
-          message.cone_end_from_listing_in_month = longToNumber(
+          message.coneEndFromListingInMonth = longToNumber(
             reader.uint64() as Long
           );
           break;
@@ -93,44 +93,44 @@ export const VestingParams = {
       message.id = "";
     }
     if (
-      object.honey_start_from_listing_in_month !== undefined &&
-      object.honey_start_from_listing_in_month !== null
+      object.honeyStartFromListingInMonth !== undefined &&
+      object.honeyStartFromListingInMonth !== null
     ) {
-      message.honey_start_from_listing_in_month = Number(
-        object.honey_start_from_listing_in_month
+      message.honeyStartFromListingInMonth = Number(
+        object.honeyStartFromListingInMonth
       );
     } else {
-      message.honey_start_from_listing_in_month = 0;
+      message.honeyStartFromListingInMonth = 0;
     }
     if (
-      object.honey_end_from_listing_in_month !== undefined &&
-      object.honey_end_from_listing_in_month !== null
+      object.honeyEndFromListingInMonth !== undefined &&
+      object.honeyEndFromListingInMonth !== null
     ) {
-      message.honey_end_from_listing_in_month = Number(
-        object.honey_end_from_listing_in_month
+      message.honeyEndFromListingInMonth = Number(
+        object.honeyEndFromListingInMonth
       );
     } else {
-      message.honey_end_from_listing_in_month = 0;
+      message.honeyEndFromListingInMonth = 0;
     }
     if (
-      object.cone_start_from_listing_in_month !== undefined &&
-      object.cone_start_from_listing_in_month !== null
+      object.coneStartFromListingInMonth !== undefined &&
+      object.coneStartFromListingInMonth !== null
     ) {
-      message.cone_start_from_listing_in_month = Number(
-        object.cone_start_from_listing_in_month
+      message.coneStartFromListingInMonth = Number(
+        object.coneStartFromListingInMonth
       );
     } else {
-      message.cone_start_from_listing_in_month = 0;
+      message.coneStartFromListingInMonth = 0;
     }
     if (
-      object.cone_end_from_listing_in_month !== undefined &&
-      object.cone_end_from_listing_in_month !== null
+      object.coneEndFromListingInMonth !== undefined &&
+      object.coneEndFromListingInMonth !== null
     ) {
-      message.cone_end_from_listing_in_month = Number(
-        object.cone_end_from_listing_in_month
+      message.coneEndFromListingInMonth = Number(
+        object.coneEndFromListingInMonth
       );
     } else {
-      message.cone_end_from_listing_in_month = 0;
+      message.coneEndFromListingInMonth = 0;
     }
     return message;
   },
@@ -138,18 +138,14 @@ export const VestingParams = {
   toJSON(message: VestingParams): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
-    message.honey_start_from_listing_in_month !== undefined &&
-      (obj.honey_start_from_listing_in_month =
-        message.honey_start_from_listing_in_month);
-    message.honey_end_from_listing_in_month !== undefined &&
-      (obj.honey_end_from_listing_in_month =
-        message.honey_end_from_listing_in_month);
-    message.cone_start_from_listing_in_month !== undefined &&
-      (obj.cone_start_from_listing_in_month =
-        message.cone_start_from_listing_in_month);
-    message.cone_end_from_listing_in_month !== undefined &&
-      (obj.cone_end_from_listing_in_month =
-        message.cone_end_from_listing_in_month);
+    message.honeyStartFromListingInMonth !== undefined &&
+      (obj.honeyStartFromListingInMonth = message.honeyStartFromListingInMonth);
+    message.honeyEndFromListingInMonth !== undefined &&
+      (obj.honeyEndFromListingInMonth = message.honeyEndFromListingInMonth);
+    message.coneStartFromListingInMonth !== undefined &&
+      (obj.coneStartFromListingInMonth = message.coneStartFromListingInMonth);
+    message.coneEndFromListingInMonth !== undefined &&
+      (obj.coneEndFromListingInMonth = message.coneEndFromListingInMonth);
     return obj;
   },
 
@@ -161,52 +157,49 @@ export const VestingParams = {
       message.id = "";
     }
     if (
-      object.honey_start_from_listing_in_month !== undefined &&
-      object.honey_start_from_listing_in_month !== null
+      object.honeyStartFromListingInMonth !== undefined &&
+      object.honeyStartFromListingInMonth !== null
     ) {
-      message.honey_start_from_listing_in_month =
-        object.honey_start_from_listing_in_month;
+      message.honeyStartFromListingInMonth =
+        object.honeyStartFromListingInMonth;
     } else {
-      message.honey_start_from_listing_in_month = 0;
+      message.honeyStartFromListingInMonth = 0;
     }
     if (
-      object.honey_end_from_listing_in_month !== undefined &&
-      object.honey_end_from_listing_in_month !== null
+      object.honeyEndFromListingInMonth !== undefined &&
+      object.honeyEndFromListingInMonth !== null
     ) {
-      message.honey_end_from_listing_in_month =
-        object.honey_end_from_listing_in_month;
+      message.honeyEndFromListingInMonth = object.honeyEndFromListingInMonth;
     } else {
-      message.honey_end_from_listing_in_month = 0;
+      message.honeyEndFromListingInMonth = 0;
     }
     if (
-      object.cone_start_from_listing_in_month !== undefined &&
-      object.cone_start_from_listing_in_month !== null
+      object.coneStartFromListingInMonth !== undefined &&
+      object.coneStartFromListingInMonth !== null
     ) {
-      message.cone_start_from_listing_in_month =
-        object.cone_start_from_listing_in_month;
+      message.coneStartFromListingInMonth = object.coneStartFromListingInMonth;
     } else {
-      message.cone_start_from_listing_in_month = 0;
+      message.coneStartFromListingInMonth = 0;
     }
     if (
-      object.cone_end_from_listing_in_month !== undefined &&
-      object.cone_end_from_listing_in_month !== null
+      object.coneEndFromListingInMonth !== undefined &&
+      object.coneEndFromListingInMonth !== null
     ) {
-      message.cone_end_from_listing_in_month =
-        object.cone_end_from_listing_in_month;
+      message.coneEndFromListingInMonth = object.coneEndFromListingInMonth;
     } else {
-      message.cone_end_from_listing_in_month = 0;
+      message.coneEndFromListingInMonth = 0;
     }
     return message;
   },
 };
 
-const basePlayerAccount: object = { bears: 0, vesting_type: "" };
+const basePlayerAccount: object = { bears: 0, vestingType: "" };
 
 export const PlayerAccount = {
   encode(message: PlayerAccount, writer: Writer = Writer.create()): Writer {
-    if (message.base_vesting_account !== undefined) {
+    if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(
-        message.base_vesting_account,
+        message.baseVestingAccount,
         writer.uint32(10).fork()
       ).ldelim();
     }
@@ -215,8 +208,8 @@ export const PlayerAccount = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.vesting_type !== "") {
-      writer.uint32(26).string(message.vesting_type);
+    if (message.vestingType !== "") {
+      writer.uint32(26).string(message.vestingType);
     }
     return writer;
   },
@@ -230,7 +223,7 @@ export const PlayerAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.base_vesting_account = BaseVestingAccount.decode(
+          message.baseVestingAccount = BaseVestingAccount.decode(
             reader,
             reader.uint32()
           );
@@ -246,7 +239,7 @@ export const PlayerAccount = {
           }
           break;
         case 3:
-          message.vesting_type = reader.string();
+          message.vestingType = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -260,41 +253,41 @@ export const PlayerAccount = {
     const message = { ...basePlayerAccount } as PlayerAccount;
     message.bears = [];
     if (
-      object.base_vesting_account !== undefined &&
-      object.base_vesting_account !== null
+      object.baseVestingAccount !== undefined &&
+      object.baseVestingAccount !== null
     ) {
-      message.base_vesting_account = BaseVestingAccount.fromJSON(
-        object.base_vesting_account
+      message.baseVestingAccount = BaseVestingAccount.fromJSON(
+        object.baseVestingAccount
       );
     } else {
-      message.base_vesting_account = undefined;
+      message.baseVestingAccount = undefined;
     }
     if (object.bears !== undefined && object.bears !== null) {
       for (const e of object.bears) {
         message.bears.push(Number(e));
       }
     }
-    if (object.vesting_type !== undefined && object.vesting_type !== null) {
-      message.vesting_type = String(object.vesting_type);
+    if (object.vestingType !== undefined && object.vestingType !== null) {
+      message.vestingType = String(object.vestingType);
     } else {
-      message.vesting_type = "";
+      message.vestingType = "";
     }
     return message;
   },
 
   toJSON(message: PlayerAccount): unknown {
     const obj: any = {};
-    message.base_vesting_account !== undefined &&
-      (obj.base_vesting_account = message.base_vesting_account
-        ? BaseVestingAccount.toJSON(message.base_vesting_account)
+    message.baseVestingAccount !== undefined &&
+      (obj.baseVestingAccount = message.baseVestingAccount
+        ? BaseVestingAccount.toJSON(message.baseVestingAccount)
         : undefined);
     if (message.bears) {
       obj.bears = message.bears.map((e) => e);
     } else {
       obj.bears = [];
     }
-    message.vesting_type !== undefined &&
-      (obj.vesting_type = message.vesting_type);
+    message.vestingType !== undefined &&
+      (obj.vestingType = message.vestingType);
     return obj;
   },
 
@@ -302,24 +295,24 @@ export const PlayerAccount = {
     const message = { ...basePlayerAccount } as PlayerAccount;
     message.bears = [];
     if (
-      object.base_vesting_account !== undefined &&
-      object.base_vesting_account !== null
+      object.baseVestingAccount !== undefined &&
+      object.baseVestingAccount !== null
     ) {
-      message.base_vesting_account = BaseVestingAccount.fromPartial(
-        object.base_vesting_account
+      message.baseVestingAccount = BaseVestingAccount.fromPartial(
+        object.baseVestingAccount
       );
     } else {
-      message.base_vesting_account = undefined;
+      message.baseVestingAccount = undefined;
     }
     if (object.bears !== undefined && object.bears !== null) {
       for (const e of object.bears) {
         message.bears.push(e);
       }
     }
-    if (object.vesting_type !== undefined && object.vesting_type !== null) {
-      message.vesting_type = object.vesting_type;
+    if (object.vestingType !== undefined && object.vestingType !== null) {
+      message.vestingType = object.vestingType;
     } else {
-      message.vesting_type = "";
+      message.vestingType = "";
     }
     return message;
   },
