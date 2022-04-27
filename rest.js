@@ -136,12 +136,41 @@ export class HttpClient {
     }
 }
 /**
- * @title bears/air_info.proto
+ * @title bears/address_bears.proto
  * @version version not set
  */
 export class Api extends HttpClient {
     constructor() {
         super(...arguments);
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryAddressBearsAll
+         * @summary Queries a list of AddressBears items.
+         * @request GET:/MonetaToday/honeywood/bears/address_bears
+         */
+        this.queryAddressBearsAll = (query, params = {}) => this.request({
+            path: `/MonetaToday/honeywood/bears/address_bears`,
+            method: "GET",
+            query: query,
+            format: "json",
+            ...params,
+        });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryAddressBears
+         * @summary Queries a AddressBears by index.
+         * @request GET:/MonetaToday/honeywood/bears/address_bears/{address}
+         */
+        this.queryAddressBears = (address, params = {}) => this.request({
+            path: `/MonetaToday/honeywood/bears/address_bears/${address}`,
+            method: "GET",
+            format: "json",
+            ...params,
+        });
         /**
          * No description
          *

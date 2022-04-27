@@ -5,6 +5,7 @@ import { Params } from "../bears/params";
 import { BearNames } from "../bears/bear_names";
 import { PageRequest, PageResponse, } from "../cosmos/base/query/v1beta1/pagination";
 import { Bears } from "../bears/bears";
+import { AddressBears } from "../bears/address_bears";
 import { Fields } from "../bears/fields";
 import { Trees, TreeParams } from "../bears/trees";
 import { Decorations, DecorationParams } from "../bears/decorations";
@@ -584,6 +585,268 @@ export const QueryAllBearsResponse = {
         if (object.Bears !== undefined && object.Bears !== null) {
             for (const e of object.Bears) {
                 message.Bears.push(Bears.fromPartial(e));
+            }
+        }
+        if (object.pagination !== undefined && object.pagination !== null) {
+            message.pagination = PageResponse.fromPartial(object.pagination);
+        }
+        else {
+            message.pagination = undefined;
+        }
+        return message;
+    },
+};
+const baseQueryGetAddressBearsRequest = { address: "" };
+export const QueryGetAddressBearsRequest = {
+    encode(message, writer = Writer.create()) {
+        if (message.address !== "") {
+            writer.uint32(10).string(message.address);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseQueryGetAddressBearsRequest,
+        };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.address = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = {
+            ...baseQueryGetAddressBearsRequest,
+        };
+        if (object.address !== undefined && object.address !== null) {
+            message.address = String(object.address);
+        }
+        else {
+            message.address = "";
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.address !== undefined && (obj.address = message.address);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = {
+            ...baseQueryGetAddressBearsRequest,
+        };
+        if (object.address !== undefined && object.address !== null) {
+            message.address = object.address;
+        }
+        else {
+            message.address = "";
+        }
+        return message;
+    },
+};
+const baseQueryGetAddressBearsResponse = {};
+export const QueryGetAddressBearsResponse = {
+    encode(message, writer = Writer.create()) {
+        if (message.addressBears !== undefined) {
+            AddressBears.encode(message.addressBears, writer.uint32(10).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseQueryGetAddressBearsResponse,
+        };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.addressBears = AddressBears.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = {
+            ...baseQueryGetAddressBearsResponse,
+        };
+        if (object.addressBears !== undefined && object.addressBears !== null) {
+            message.addressBears = AddressBears.fromJSON(object.addressBears);
+        }
+        else {
+            message.addressBears = undefined;
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.addressBears !== undefined &&
+            (obj.addressBears = message.addressBears
+                ? AddressBears.toJSON(message.addressBears)
+                : undefined);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = {
+            ...baseQueryGetAddressBearsResponse,
+        };
+        if (object.addressBears !== undefined && object.addressBears !== null) {
+            message.addressBears = AddressBears.fromPartial(object.addressBears);
+        }
+        else {
+            message.addressBears = undefined;
+        }
+        return message;
+    },
+};
+const baseQueryAllAddressBearsRequest = {};
+export const QueryAllAddressBearsRequest = {
+    encode(message, writer = Writer.create()) {
+        if (message.pagination !== undefined) {
+            PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseQueryAllAddressBearsRequest,
+        };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.pagination = PageRequest.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = {
+            ...baseQueryAllAddressBearsRequest,
+        };
+        if (object.pagination !== undefined && object.pagination !== null) {
+            message.pagination = PageRequest.fromJSON(object.pagination);
+        }
+        else {
+            message.pagination = undefined;
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.pagination !== undefined &&
+            (obj.pagination = message.pagination
+                ? PageRequest.toJSON(message.pagination)
+                : undefined);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = {
+            ...baseQueryAllAddressBearsRequest,
+        };
+        if (object.pagination !== undefined && object.pagination !== null) {
+            message.pagination = PageRequest.fromPartial(object.pagination);
+        }
+        else {
+            message.pagination = undefined;
+        }
+        return message;
+    },
+};
+const baseQueryAllAddressBearsResponse = {};
+export const QueryAllAddressBearsResponse = {
+    encode(message, writer = Writer.create()) {
+        for (const v of message.addressBears) {
+            AddressBears.encode(v, writer.uint32(10).fork()).ldelim();
+        }
+        if (message.pagination !== undefined) {
+            PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = {
+            ...baseQueryAllAddressBearsResponse,
+        };
+        message.addressBears = [];
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.addressBears.push(AddressBears.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.pagination = PageResponse.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = {
+            ...baseQueryAllAddressBearsResponse,
+        };
+        message.addressBears = [];
+        if (object.addressBears !== undefined && object.addressBears !== null) {
+            for (const e of object.addressBears) {
+                message.addressBears.push(AddressBears.fromJSON(e));
+            }
+        }
+        if (object.pagination !== undefined && object.pagination !== null) {
+            message.pagination = PageResponse.fromJSON(object.pagination);
+        }
+        else {
+            message.pagination = undefined;
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        if (message.addressBears) {
+            obj.addressBears = message.addressBears.map((e) => e ? AddressBears.toJSON(e) : undefined);
+        }
+        else {
+            obj.addressBears = [];
+        }
+        message.pagination !== undefined &&
+            (obj.pagination = message.pagination
+                ? PageResponse.toJSON(message.pagination)
+                : undefined);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = {
+            ...baseQueryAllAddressBearsResponse,
+        };
+        message.addressBears = [];
+        if (object.addressBears !== undefined && object.addressBears !== null) {
+            for (const e of object.addressBears) {
+                message.addressBears.push(AddressBears.fromPartial(e));
             }
         }
         if (object.pagination !== undefined && object.pagination !== null) {
@@ -4104,6 +4367,16 @@ export class QueryClientImpl {
         const data = QueryAllBearsRequest.encode(request).finish();
         const promise = this.rpc.request("MonetaToday.honeywood.bears.Query", "BearsAll", data);
         return promise.then((data) => QueryAllBearsResponse.decode(new Reader(data)));
+    }
+    AddressBears(request) {
+        const data = QueryGetAddressBearsRequest.encode(request).finish();
+        const promise = this.rpc.request("MonetaToday.honeywood.bears.Query", "AddressBears", data);
+        return promise.then((data) => QueryGetAddressBearsResponse.decode(new Reader(data)));
+    }
+    AddressBearsAll(request) {
+        const data = QueryAllAddressBearsRequest.encode(request).finish();
+        const promise = this.rpc.request("MonetaToday.honeywood.bears.Query", "AddressBearsAll", data);
+        return promise.then((data) => QueryAllAddressBearsResponse.decode(new Reader(data)));
     }
     Fields(request) {
         const data = QueryGetFieldsRequest.encode(request).finish();

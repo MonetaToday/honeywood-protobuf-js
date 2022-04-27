@@ -2,6 +2,7 @@ import { Writer, Reader } from "protobufjs/minimal";
 import { Params } from "../bears/params";
 import { BearNames } from "../bears/bear_names";
 import { Bears } from "../bears/bears";
+import { AddressBears } from "../bears/address_bears";
 import { Fields } from "../bears/fields";
 import { Trees } from "../bears/trees";
 import { Decorations } from "../bears/decorations";
@@ -15,6 +16,7 @@ export interface GenesisState {
     bearNamesList: BearNames[];
     bearsList: Bears[];
     bearsCount: number;
+    addressBearsList: AddressBears[];
     fieldsList: Fields[];
     fieldsCount: number;
     treesList: Trees[];
