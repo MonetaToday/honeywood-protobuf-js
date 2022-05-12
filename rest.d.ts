@@ -69,7 +69,6 @@ export interface BearsApiaries {
     /** @format uint64 */
     spaceOccupied?: string;
     honeyFromPast?: string;
-    fieldFertility?: string;
 }
 export interface BearsApiaryHouse {
     /** @format uint64 */
@@ -82,7 +81,6 @@ export interface BearsApiaryParams {
     spaceAvailable?: string;
     maxHoney?: string;
     deleteReward?: V1Beta1Coin[];
-    fertility?: string;
 }
 export interface BearsBearNames {
     name?: string;
@@ -120,8 +118,6 @@ export interface BearsBees {
     bearOwner?: BearsBearOwner;
     apiaryHouse?: BearsApiaryHouse;
     params?: BearsBeeParams;
-    fieldFertility?: string;
-    apiaryFertility?: string;
 }
 export interface BearsCycleHistory {
     /** @format uint64 */
@@ -141,7 +137,6 @@ export interface BearsDecorations {
 }
 export interface BearsFieldParams {
     fieldType?: string;
-    fertility?: string;
     priceTile?: V1Beta1Coin[];
 }
 export interface BearsFieldRows {
@@ -229,7 +224,9 @@ export interface BearsParams {
     decorationTypes?: BearsDecorationParams[];
     apiaryTypes?: BearsApiaryParams[];
     beeTypes?: BearsBeeParams[];
-    honeyDenom?: string;
+    /** @format uint64 */
+    minNameLength?: string;
+    bearAirConsume?: string;
 }
 export interface BearsQueryAllAddressBearsResponse {
     addressBears?: BearsAddressBears[];
