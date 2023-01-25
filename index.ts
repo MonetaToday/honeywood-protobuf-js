@@ -1,7 +1,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY. DO NOT MODIFY.
 
 import { StdFee } from "@cosmjs/launchpad";
-import { SigningStargateClient } from "@cosmjs/stargate";
+import { SigningStargateClient, defaultRegistryTypes } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
 import { MsgClearApiaryFromBees } from "./types/bears/tx";
@@ -47,7 +47,7 @@ const types = [
   ["/MonetaToday.honeywood.bears.MsgMoveItemOnField", MsgMoveItemOnField],
   ["/MonetaToday.honeywood.bears.MsgSetApiaryHouseForBee", MsgSetApiaryHouseForBee],
   ["/MonetaToday.honeywood.bears.MsgCreateDecoration", MsgCreateDecoration],
-  
+  ...defaultRegistryTypes,
 ];
 export const MissingWalletError = new Error("wallet is required");
 
