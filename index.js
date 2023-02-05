@@ -10,6 +10,7 @@ import { MsgCreateTree } from "./types/bears/tx";
 import { MsgCollectHoneyFromApiary } from "./types/bears/tx";
 import { MsgInitGameAndCreateApiary } from "./types/bears/tx";
 import { MsgCreateApiary } from "./types/bears/tx";
+import { MsgBurnCoins } from "./types/bears/tx";
 import { MsgInitGameAndCreateDecoration } from "./types/bears/tx";
 import { MsgDeleteApiary } from "./types/bears/tx";
 import { MsgInitGameAndSetName } from "./types/bears/tx";
@@ -31,6 +32,7 @@ const types = [
     ["/MonetaToday.honeywood.bears.MsgCollectHoneyFromApiary", MsgCollectHoneyFromApiary],
     ["/MonetaToday.honeywood.bears.MsgInitGameAndCreateApiary", MsgInitGameAndCreateApiary],
     ["/MonetaToday.honeywood.bears.MsgCreateApiary", MsgCreateApiary],
+    ["/MonetaToday.honeywood.bears.MsgBurnCoins", MsgBurnCoins],
     ["/MonetaToday.honeywood.bears.MsgInitGameAndCreateDecoration", MsgInitGameAndCreateDecoration],
     ["/MonetaToday.honeywood.bears.MsgDeleteApiary", MsgDeleteApiary],
     ["/MonetaToday.honeywood.bears.MsgInitGameAndSetName", MsgInitGameAndSetName],
@@ -71,6 +73,7 @@ const txClient = async (wallet, { addr: addr } = { addr: "http://localhost:26657
         msgCreateTree: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgCreateTree", value: MsgCreateTree.fromPartial(data) }),
         msgCollectHoneyFromApiary: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgCollectHoneyFromApiary", value: MsgCollectHoneyFromApiary.fromPartial(data) }),
         msgInitGameAndCreateApiary: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgInitGameAndCreateApiary", value: MsgInitGameAndCreateApiary.fromPartial(data) }),
+        msgBurnCoins: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgBurnCoins", value: MsgBurnCoins.fromPartial(data) }),
         msgCreateApiary: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgCreateApiary", value: MsgCreateApiary.fromPartial(data) }),
         msgInitGameAndCreateDecoration: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgInitGameAndCreateDecoration", value: MsgInitGameAndCreateDecoration.fromPartial(data) }),
         msgDeleteApiary: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgDeleteApiary", value: MsgDeleteApiary.fromPartial(data) }),
