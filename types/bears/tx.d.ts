@@ -164,6 +164,12 @@ export interface MsgDeleteApiary {
 }
 export interface MsgDeleteApiaryResponse {
 }
+export interface MsgBurnCoins {
+    creator: string;
+    coins: Coin[];
+}
+export interface MsgBurnCoinsResponse {
+}
 export declare const MsgInitGameAndSetName: {
     encode(message: MsgInitGameAndSetName, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgInitGameAndSetName;
@@ -444,6 +450,20 @@ export declare const MsgDeleteApiaryResponse: {
     toJSON(_: MsgDeleteApiaryResponse): unknown;
     fromPartial(_: DeepPartial<MsgDeleteApiaryResponse>): MsgDeleteApiaryResponse;
 };
+export declare const MsgBurnCoins: {
+    encode(message: MsgBurnCoins, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgBurnCoins;
+    fromJSON(object: any): MsgBurnCoins;
+    toJSON(message: MsgBurnCoins): unknown;
+    fromPartial(object: DeepPartial<MsgBurnCoins>): MsgBurnCoins;
+};
+export declare const MsgBurnCoinsResponse: {
+    encode(_: MsgBurnCoinsResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgBurnCoinsResponse;
+    fromJSON(_: any): MsgBurnCoinsResponse;
+    toJSON(_: MsgBurnCoinsResponse): unknown;
+    fromPartial(_: DeepPartial<MsgBurnCoinsResponse>): MsgBurnCoinsResponse;
+};
 /** Msg defines the Msg service. */
 export interface Msg {
     InitGameAndSetName(request: MsgInitGameAndSetName): Promise<MsgInitGameAndSetNameResponse>;
@@ -465,8 +485,9 @@ export interface Msg {
     UnsetApiaryHouseForBee(request: MsgUnsetApiaryHouseForBee): Promise<MsgUnsetApiaryHouseForBeeResponse>;
     CollectHoneyFromApiary(request: MsgCollectHoneyFromApiary): Promise<MsgCollectHoneyFromApiaryResponse>;
     ClearApiaryFromBees(request: MsgClearApiaryFromBees): Promise<MsgClearApiaryFromBeesResponse>;
-    /** this line is used by starport scaffolding # proto/tx/rpc */
     DeleteApiary(request: MsgDeleteApiary): Promise<MsgDeleteApiaryResponse>;
+    /** this line is used by starport scaffolding # proto/tx/rpc */
+    BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>;
 }
 export declare class MsgClientImpl implements Msg {
     private readonly rpc;
@@ -491,6 +512,7 @@ export declare class MsgClientImpl implements Msg {
     CollectHoneyFromApiary(request: MsgCollectHoneyFromApiary): Promise<MsgCollectHoneyFromApiaryResponse>;
     ClearApiaryFromBees(request: MsgClearApiaryFromBees): Promise<MsgClearApiaryFromBeesResponse>;
     DeleteApiary(request: MsgDeleteApiary): Promise<MsgDeleteApiaryResponse>;
+    BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

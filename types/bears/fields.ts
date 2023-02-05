@@ -18,8 +18,8 @@ export interface ItemPosition {
 }
 
 export interface FieldParams {
-  field_type: string;
-  price_tile: Coin[];
+  fieldType: string;
+  priceTile: Coin[];
 }
 
 export interface Fields {
@@ -183,14 +183,14 @@ export const ItemPosition = {
   },
 };
 
-const baseFieldParams: object = { field_type: "" };
+const baseFieldParams: object = { fieldType: "" };
 
 export const FieldParams = {
   encode(message: FieldParams, writer: Writer = Writer.create()): Writer {
-    if (message.field_type !== "") {
-      writer.uint32(10).string(message.field_type);
+    if (message.fieldType !== "") {
+      writer.uint32(10).string(message.fieldType);
     }
-    for (const v of message.price_tile) {
+    for (const v of message.priceTile) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
@@ -200,15 +200,15 @@ export const FieldParams = {
     const reader = input instanceof Uint8Array ? new Reader(input) : input;
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseFieldParams } as FieldParams;
-    message.price_tile = [];
+    message.priceTile = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.field_type = reader.string();
+          message.fieldType = reader.string();
           break;
         case 2:
-          message.price_tile.push(Coin.decode(reader, reader.uint32()));
+          message.priceTile.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -220,15 +220,15 @@ export const FieldParams = {
 
   fromJSON(object: any): FieldParams {
     const message = { ...baseFieldParams } as FieldParams;
-    message.price_tile = [];
-    if (object.field_type !== undefined && object.field_type !== null) {
-      message.field_type = String(object.field_type);
+    message.priceTile = [];
+    if (object.fieldType !== undefined && object.fieldType !== null) {
+      message.fieldType = String(object.fieldType);
     } else {
-      message.field_type = "";
+      message.fieldType = "";
     }
-    if (object.price_tile !== undefined && object.price_tile !== null) {
-      for (const e of object.price_tile) {
-        message.price_tile.push(Coin.fromJSON(e));
+    if (object.priceTile !== undefined && object.priceTile !== null) {
+      for (const e of object.priceTile) {
+        message.priceTile.push(Coin.fromJSON(e));
       }
     }
     return message;
@@ -236,28 +236,28 @@ export const FieldParams = {
 
   toJSON(message: FieldParams): unknown {
     const obj: any = {};
-    message.field_type !== undefined && (obj.field_type = message.field_type);
-    if (message.price_tile) {
-      obj.price_tile = message.price_tile.map((e) =>
+    message.fieldType !== undefined && (obj.fieldType = message.fieldType);
+    if (message.priceTile) {
+      obj.priceTile = message.priceTile.map((e) =>
         e ? Coin.toJSON(e) : undefined
       );
     } else {
-      obj.price_tile = [];
+      obj.priceTile = [];
     }
     return obj;
   },
 
   fromPartial(object: DeepPartial<FieldParams>): FieldParams {
     const message = { ...baseFieldParams } as FieldParams;
-    message.price_tile = [];
-    if (object.field_type !== undefined && object.field_type !== null) {
-      message.field_type = object.field_type;
+    message.priceTile = [];
+    if (object.fieldType !== undefined && object.fieldType !== null) {
+      message.fieldType = object.fieldType;
     } else {
-      message.field_type = "";
+      message.fieldType = "";
     }
-    if (object.price_tile !== undefined && object.price_tile !== null) {
-      for (const e of object.price_tile) {
-        message.price_tile.push(Coin.fromPartial(e));
+    if (object.priceTile !== undefined && object.priceTile !== null) {
+      for (const e of object.priceTile) {
+        message.priceTile.push(Coin.fromPartial(e));
       }
     }
     return message;

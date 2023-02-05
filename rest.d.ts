@@ -159,6 +159,7 @@ export interface BearsItemPosition {
     /** @format uint64 */
     columnId?: string;
 }
+export declare type BearsMsgBurnCoinsResponse = object;
 export declare type BearsMsgClearApiaryFromBeesResponse = object;
 export interface BearsMsgCollectHoneyFromApiaryResponse {
     /**
