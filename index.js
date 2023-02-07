@@ -64,6 +64,7 @@ const txClient = async (wallet, { addr: addr } = { addr: "http://localhost:26657
     }
     const { address } = (await wallet.getAccounts())[0];
     return {
+        client,
         signAndBroadcast: (msgs, { fee, memo } = { fee: defaultFee, memo: "" }) => client.signAndBroadcast(address, msgs, fee, memo),
         msgSetDecorationPosition: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgSetDecorationPosition", value: MsgSetDecorationPosition.fromPartial(data) }),
         msgDeleteApiary: (data) => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgDeleteApiary", value: MsgDeleteApiary.fromPartial(data) }),

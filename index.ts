@@ -80,6 +80,7 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
   const { address } = (await wallet.getAccounts())[0];
 
   return {
+    client,
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
     msgSetDecorationPosition: (data: MsgSetDecorationPosition): EncodeObject => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgSetDecorationPosition", value: MsgSetDecorationPosition.fromPartial( data ) }),
     msgDeleteApiary: (data: MsgDeleteApiary): EncodeObject => ({ typeUrl: "/MonetaToday.honeywood.bears.MsgDeleteApiary", value: MsgDeleteApiary.fromPartial( data ) }),
